@@ -1,6 +1,4 @@
 import uuid
-from _operator import pos
-
 from src.common.Database import Database
 import datetime
 
@@ -21,7 +19,7 @@ class Post(object):
 
     def json(self):
         return {
-            '_id': self.id,
+            '_id': self._id,
             'blog_id': self.blog_id,
             'author': self.author,
             'content': self.content,
