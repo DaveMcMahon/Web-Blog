@@ -1,7 +1,8 @@
+import datetime
 import uuid
 from flask import session
 from src.common.Database import Database
-from src.models import Blog
+from src.models.Blog import Blog
 
 
 class User(object):
@@ -23,9 +24,9 @@ class User(object):
         if data is not None:
             return cls(**data)
 
-    @staticmethod
-    def login_valid(self, email, password):
-        user = User.get_by_email(email)
+    @classmethod
+    def login_valid(cls, email, password):
+        user = cls.get_by_email(email)
         if user is not None:
             return user.password == password
 
@@ -50,6 +51,21 @@ class User(object):
 
     def get_blogs(self):
         return Blog.find_by_author_id(self._id)
+
+    def new_blog(self, title, description):
+        blog = Blog(author=self.email,
+                    title=title,
+                    description=description,
+                    author_id=self._id)
+
+        blog.save_to_mongo()
+
+    @staticmethod
+    def new_post(blog_id, title, content, date=datetime.datetime.utcnow()):
+        blog = Blog.from_mongo(blog_id)
+        blog.new_post(title=title,
+                      content=content,
+                      date=date)
 
     def json(self):
         return {
