@@ -7,10 +7,11 @@ from src.common.Database import Database
 from src.models.User import User
 
 app = Flask(__name__)
+app.secret_key = "5+34Fuj"
 
 
 @app.route("/")
-def hello_world():
+def login_route():
     return render_template("login.html")
 
 
@@ -19,7 +20,7 @@ def initialize_database():
     Database.initialise()
 
 
-@app.route("/login", methods=['POST'])
+@app.route('/login', methods=['POST'])
 def login():
     email = request.form['email']
     password = request.form['password']

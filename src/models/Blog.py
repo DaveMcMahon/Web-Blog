@@ -33,7 +33,7 @@ class Blog(object):
             'title': self.title,
             'description': self.description,
             'author_id': self.author_id,
-            '_id': self.id
+            '_id': self._id
         }
 
     @classmethod
