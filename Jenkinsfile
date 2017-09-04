@@ -4,18 +4,17 @@ pipeline {
     stages {
         stage('Build') { 
             steps { 
-                sh 'make' 
+                echo "Build Phase - Custom Output" 
             }
         }
         stage('Test'){
             steps {
-                sh 'make check'
-                junit 'reports/**/*.xml' 
+                echo "Test Phase - Custom Output"
             }
         }
         stage('Deploy') {
             steps {
-                sh 'make publish'
+                echo "Deploy Phase - Custom Output"
             }
         }
     }
