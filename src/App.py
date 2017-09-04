@@ -3,6 +3,8 @@ from flask import render_template
 from flask import request
 from flask import session
 
+# New comment - Dave McMahon - 04/09/2017
+
 from src.common.Database import Database
 from src.models.User import User
 
